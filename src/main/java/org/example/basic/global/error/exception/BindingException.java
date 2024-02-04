@@ -8,25 +8,24 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 @Getter
-public class AuthenticationException extends RuntimeException {
-
+public class BindingException extends RuntimeException {
 
     private final ErrorCode errorCode;
     private final String errorDetailMessage;
 
-    public AuthenticationException(ErrorCode errorCode) {
+    public BindingException(ErrorCode errorCode) {
         super(errorCode.getMessage()); // RuntimeException에 에러 메시지를 전달
         this.errorCode = errorCode;
         this.errorDetailMessage = getStackTraceMessage(this);
     }
 
-    public AuthenticationException(ErrorCode errorCode, String errorDetailMessage) {
+    public BindingException(ErrorCode errorCode, String errorDetailMessage) {
         super(errorDetailMessage); // RuntimeException에 에러 메시지를 전달
         this.errorCode = errorCode;
         this.errorDetailMessage = errorDetailMessage;
     }
 
-    public AuthenticationException(ErrorCode errorCode, Exception exception) {
+    public BindingException(ErrorCode errorCode, Exception exception) {
         super(errorCode.getMessage()); // RuntimeException에 에러 메시지를 전달
         this.errorCode = errorCode;
         this.errorDetailMessage = getStackTraceMessage(exception);
@@ -37,5 +36,4 @@ public class AuthenticationException extends RuntimeException {
         exception.printStackTrace(new PrintWriter(stringWriter));
         return stringWriter.toString();
     }
-
 }
