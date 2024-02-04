@@ -29,7 +29,7 @@ public class BindingAdvice extends RestApiControllerAdvice{
         super(objectMapper, applicationEventPublisher);
     }
 
-    @Around("execution(* org.example.basic ..*Controller.*(..))")
+    @Around("execution(* org.example.basic ..*RestController.*(..))")
     public Object validationHandler(ProceedingJoinPoint joinPoint) throws Throwable {
         String type = bindingPathCreate(joinPoint.getSignature());
         String method = "Not Found";
