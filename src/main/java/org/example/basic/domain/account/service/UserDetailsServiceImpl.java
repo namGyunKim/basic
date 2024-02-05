@@ -19,7 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
-        Account account = accountRepository.findByLoginId(loginId).orElseThrow(() -> new UsernameNotFoundException("user not found"));
+        Account account = accountRepository.findByLoginId(loginId).orElseThrow(() -> new UsernameNotFoundException("존재하지 않는 아이디입니다."));
         return new UserDetailsImpl(account);
     }
 }

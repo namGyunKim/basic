@@ -23,7 +23,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         UserDetailsImpl account = (UserDetailsImpl) userDetailsService.loadUserByUsername(username);
 
         if (!passwordEncoder.matches(password, account.getPassword())) {
-            throw new BadCredentialsException("invalid password");
+            throw new BadCredentialsException("비밀번호가 일치하지않습니다.");
         }
 
         /*
@@ -31,11 +31,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
          * */
 
         if (!account.isAccountNonLocked()) {
-            throw new LockedException("loginId is not verified");
+            throw new LockedException("계정이 잠겼습니다. 관리자에게 문의하세요.");
         }
 
         if (!account.isEnabled()) {
-            throw new DisabledException("loginId is not verified");
+            throw new DisabledException("계정이 비활성화 되었습니다. 관리자에게 문의하세요.");
         }
 
         UsernamePasswordAuthenticationToken result = new UsernamePasswordAuthenticationToken(account, password, account.getAuthorities());
